@@ -1,4 +1,4 @@
-package com.example.proyectofinal.dataLayer.repositories.db
+package com.example.proyectofinal.dataLayer.dataSource.room.daos
 
 import androidx.room.Dao
 import androidx.room.Insert

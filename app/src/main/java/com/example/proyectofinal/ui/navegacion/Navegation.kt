@@ -1,5 +1,6 @@
 package com.example.proyectofinal.ui.navegacion
 
+import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -19,7 +20,7 @@ sealed class Routes(val route: String) {
 }
 
 @Composable
-fun Navigation(viewModelDog: ViewModelDog) {
+fun Navigation(viewModelDog: ViewModelDog, context : Context) {
     val navController = rememberNavController()
 
     NavHost(
@@ -39,7 +40,8 @@ fun Navigation(viewModelDog: ViewModelDog) {
             val breed = it.arguments?.getString("breed") ?: ""
             ScreenDetail(
                 breed,
-                viewModel = viewModelDog
+                viewModel = viewModelDog,
+                context
             )
         }
 

@@ -9,11 +9,11 @@ import androidx.lifecycle.viewModelScope
 import com.example.proyectofinal.dataLayer.model.Dog
 import com.example.proyectofinal.dataLayer.repositories.db.DogRepositoryRoom
 import com.example.proyectofinal.dataLayer.repositories.network.DogRepository
-import com.example.proyectofinal.domainLayer.utils.convertResponseApiToBreedsList
-import com.example.proyectofinal.domainLayer.utils.dogToDogEntity
-import com.example.proyectofinal.domainLayer.utils.dogsEntityToDogs
-import com.example.proyectofinal.domainLayer.utils.stringImageOrStringsImages
-import com.example.proyectofinal.domainLayer.utils.stringsImagesTransformation
+import com.example.proyectofinal.domainLayer.utils.apiResponseToBreedsList
+import com.example.proyectofinal.domainLayer.utils.dogModelToDogEntity
+import com.example.proyectofinal.domainLayer.utils.dogsEntityToDogsModelList
+import com.example.proyectofinal.domainLayer.utils.stringImgOrStringsImgs
+import com.example.proyectofinal.domainLayer.utils.stringsImgsTransfor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -37,8 +37,7 @@ class ViewModelDog(var roomRepository: DogRepositoryRoom) : ViewModel() {
         viewModelScope.launch {
             try {
                 val breeds = repository.getDogBreeds()
-                _dogBreeds.value = convertResponseApiToBreedsList(breeds.message)
-                val dogs = convertResponseApiToBreedsList(breeds.message)
+                _dogBreeds.value = apiResponseToBreedsList(breeds.message)
             } catch (e: Exception) {
                 // Handle error
                 Log.d("LUAa", "getDogBreeds: ${e.message}")
@@ -49,12 +48,12 @@ class ViewModelDog(var roomRepository: DogRepositoryRoom) : ViewModel() {
     fun getDogBreedImages(breed:String){
         viewModelScope.launch {
             try {
-                if (stringImageOrStringsImages(breed)){
-                    val images = repository.getdogBreedImagesService(breed).message
+                if (stringImgOrStringsImgs(breed)){
+                    val images = repository.getDogBreedImagesService(breed).message
                     _dogsDetail.value = images
                 }else{
-                    val transformation = stringsImagesTransformation(breed)
-                    val images = repository.getdogBreedsImagesService(transformation.breeds,transformation.hound).message
+                    val transformation = stringsImgsTransfor(breed)
+                    val images = repository.getDogBreedsImagesService(transformation.breeds,transformation.hound).message
                     _dogsDetail.value = images
                 }
 
@@ -67,7 +66,7 @@ class ViewModelDog(var roomRepository: DogRepositoryRoom) : ViewModel() {
 
     fun getRoomAllDogs(){
         viewModelScope.launch(Dispatchers.Main) {
-            val data = dogsEntityToDogs(roomRepository.allDogs.first())
+            val data = dogsEntityToDogsModelList(roomRepository.allDogs.first())
             _roomDogBreeds.value = data.map { it.breed }
         }
 
@@ -75,7 +74,7 @@ class ViewModelDog(var roomRepository: DogRepositoryRoom) : ViewModel() {
 
     fun insertRoomDog(dog: Dog){
         viewModelScope.launch(Dispatchers.IO){
-            roomRepository.insert(dogToDogEntity(dog))
+            roomRepository.insert(dogModelToDogEntity(dog))
         }
         getRoomAllDogs()
     }

@@ -11,14 +11,14 @@ class DogRepository {
         return dogService.getBreeds()
     }
     suspend fun getDogImg(breed: String): ImgsBreeds {
-        return dogService.getBreedsImages(breed)
+        return dogService.getImagesBreeds(breed)
     }
 
-    suspend fun getdogBreedImagesService(breeds:String): ImgsBreeds {
-        return dogService.getBreedsImages(breeds = breeds)
+    suspend fun getDogBreedImagesService(breeds:String): ImgsBreeds {
+        return dogService.getImagesBreeds(breeds = breeds)
     }
 
-    suspend fun getdogBreedsImagesService(breeds:String, hound:String): ImgsBreeds {
-        return dogService.getBreedsImages(breeds = breeds, hound = hound)
+    suspend fun getDogBreedsImagesService(breeds:String, hound:String): ImgsBreeds {
+        return dogService.getImagesBreedsHound(breeds = breeds, hound = hound)
     }
 }

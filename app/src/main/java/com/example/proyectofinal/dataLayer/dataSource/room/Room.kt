@@ -1,10 +1,11 @@
-package com.example.proyectofinal.dataLayer.repositories.db
+package com.example.proyectofinal.dataLayer.dataSource.room
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.proyectofinal.dataLayer.entities.DogEntity
+import com.example.proyectofinal.dataLayer.dataSource.room.daos.DogDao
 import kotlinx.coroutines.CoroutineScope
 
 @Database(
@@ -12,7 +13,9 @@ import kotlinx.coroutines.CoroutineScope
     version = 2
 ) abstract class DogRoomDb : RoomDatabase() {
 
-    abstract fun dogDao(): DogDao companion object {
+    abstract fun dogDao(): DogDao
+
+    companion object {
 
         @Volatile
         private var INSTANCE: DogRoomDb? = null
@@ -20,7 +23,7 @@ import kotlinx.coroutines.CoroutineScope
         fun getDatabase(
             context: Context,
             scope: CoroutineScope
-        ):DogRoomDb{
+        ): DogRoomDb {
             return INSTANCE ?: synchronized(this){
                 val instance = Room.databaseBuilder(
                     context.applicationContext,

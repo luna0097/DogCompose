@@ -10,12 +10,12 @@ interface DogApiService {
     suspend fun getBreeds(): Breeds
 
     @GET("api/breed/{breeds}/images/random/3")
-    suspend fun getBreedsImages(
+    suspend fun getImagesBreeds(
         @Path("breeds") breeds:String,
     ): ImgsBreeds
 
     @GET("api/breed/{breeds}/{hound}/images/random/3")
-    suspend fun getBreedsImages(
+    suspend fun getImagesBreedsHound(
         @Path("breeds") breeds:String,
         @Path("hound") hound:String
     ): ImgsBreeds

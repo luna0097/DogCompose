@@ -5,7 +5,7 @@ import com.example.proyectofinal.dataLayer.model.Dog
 import com.example.proyectofinal.dataLayer.model.TransformationDog
 
 
-fun convertResponseApiToBreedsList(list: Map<String, List<String>>?):List<String> {
+fun apiResponseToBreedsList(list: Map<String, List<String>>?):List<String> {
     val dogs : ArrayList<String> = arrayListOf()
     list?.forEach { (s, strings) ->
         dogs.add(s)
@@ -17,11 +17,11 @@ fun convertResponseApiToBreedsList(list: Map<String, List<String>>?):List<String
     }
     return dogs
 }
-fun stringImageOrStringsImages(string: String):Boolean{
+fun stringImgOrStringsImgs(string: String):Boolean{
     return !string.contains("-")
 }
 
-fun stringsImagesTransformation(string: String): TransformationDog {
+fun stringsImgsTransfor(string: String): TransformationDog {
     val transformationDog = string.split("-")
     return TransformationDog(
         breeds = transformationDog.firstOrNull()?:"",
@@ -29,12 +29,12 @@ fun stringsImagesTransformation(string: String): TransformationDog {
     )
 }
 
-fun dogToDogEntity(dog: Dog):DogEntity{
+fun dogModelToDogEntity(dog: Dog):DogEntity{
     return DogEntity(breed = dog.breed, img = dog.image)
 
 }
 
-fun dogsEntityToDogs(dogs: List<DogEntity>):ArrayList<Dog>{
+fun dogsEntityToDogsModelList(dogs: List<DogEntity>):ArrayList<Dog>{
     val arrayList:ArrayList<Dog> = arrayListOf()
     dogs.forEach {
         arrayList.add(Dog(breed = it.breed, image = it.img))
