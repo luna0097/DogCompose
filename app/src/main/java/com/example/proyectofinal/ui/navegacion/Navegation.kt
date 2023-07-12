@@ -25,7 +25,6 @@ fun Navigation(viewModelDog: ViewModelDog) {
     NavHost(
         navController = navController,
         startDestination = Routes.Random.route) {
-        //viewModelDog.getDogBreeds()
 
         composable(Routes.Random.route) {
             ScreenDogs(
@@ -40,8 +39,7 @@ fun Navigation(viewModelDog: ViewModelDog) {
             val breed = it.arguments?.getString("breed") ?: ""
             ScreenDetail(
                 breed,
-                navController= navController,
-                viewModelDog = viewModelDog
+                viewModel = viewModelDog
             )
         }
 

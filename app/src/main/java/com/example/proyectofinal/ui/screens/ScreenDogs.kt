@@ -79,6 +79,7 @@ fun ScreenDogs(navController: NavHostController, viewModel: ViewModelDog) {
     }
 }
 
+/*
 @Preview(showBackground = true)
 @Composable
 fun previewScreenDogs(){
@@ -86,4 +87,4 @@ fun previewScreenDogs(){
         navController = NavHostController(LocalContext.current),
         viewModel = ViewModelDog()
     )
-}
+}*/

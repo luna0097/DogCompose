@@ -22,4 +22,5 @@ object RetrofitInstance {
     val dogBreedsService: DogApiService by lazy {
         retrofit.create(DogApiService::class.java)
     }
+
 }

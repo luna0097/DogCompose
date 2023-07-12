@@ -30,13 +30,16 @@ import com.example.proyectofinal.ui.navegacion.Routes
 
 @Composable
 fun ScreenFavorite(navController: NavHostController, viewModel: ViewModelDog) {
+
     val favoriteDogsBreedsState: MutableState<List<String>?> = remember {
         mutableStateOf(viewModel.roomDogBreeds.value)
     }
-    //Observador cuando la lista de perros cambia
+
     viewModel.roomDogBreeds.observeForever {
         favoriteDogsBreedsState.value = it
     }
+
+    viewModel.getRoomAllDogs()
 
     ProyectoFinalTheme() {
         Surface(color = MaterialTheme.colorScheme.background) {
@@ -61,14 +64,4 @@ fun ScreenFavorite(navController: NavHostController, viewModel: ViewModelDog) {
             }
         }
     }
-}
-
-
-@Preview(showBackground = true)
-@Composable
-fun previewScreenFavorite(){
-    ScreenFavorite(
-        navController = NavHostController(LocalContext.current),
-        viewModel = ViewModelDog()
-    )
 }
